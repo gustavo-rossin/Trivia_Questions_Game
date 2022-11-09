@@ -36,7 +36,7 @@ class Login extends React.Component {
     }, this.validation);
   };
 
-  // Questão 3: criei a função toSettings para enviar o usuário para a página de configurações.
+  // Requisito 3: criei a função toSettings para enviar o usuário para a página de configurações.
   toSettings = () => {
     const { history: { push } } = this.props;
     push('/settings');
