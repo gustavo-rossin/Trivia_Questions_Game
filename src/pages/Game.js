@@ -38,7 +38,6 @@ class Game extends React.Component {
   render() {
     const { results, questionIndex, isLoading } = this.state;
     const sortConstant = 0.5;
-
     const wrongAnswers = results[questionIndex].incorrect_answers.map((e, i) => (
       <button
         type="button"
