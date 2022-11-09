@@ -64,21 +64,25 @@ class Game extends React.Component {
     return (
       <div className="App-header">
         <div className="question-container">
-          {isLoading ? (<p>...Loading</p>) : (
-            <>
-              <p data-testid="question-category">
-                {results[questionIndex].category}
-              </p>
-              <p type="button" data-testid="question-text">
-                {results[questionIndex].question}
-              </p>
-              <div data-testid="answer-options">
-                {alternatives}
-              </div>
-            </>
-          ) }
+          {isLoading ? (<p>...Loading</p>)
+            : (
+              <>
+                <p data-testid="question-category">
+                  {results[questionIndex].category}
+                </p>
+                <p type="button" data-testid="question-text">
+                  {results[questionIndex].question}
+                </p>
+                <div data-testid="answer-options">
+                  {alternatives}
+                </div>
+              </>
+            )}
         </div>
       </div>
+    );
+  }
+}
 
 Game.propTypes = {
   history: PropTypes.shape({ push: PropTypes.func }).isRequired,
