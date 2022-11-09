@@ -79,9 +79,6 @@ class Game extends React.Component {
           ) }
         </div>
       </div>
-    );
-  }
-}
 
 Game.propTypes = {
   history: PropTypes.shape({ push: PropTypes.func }).isRequired,
