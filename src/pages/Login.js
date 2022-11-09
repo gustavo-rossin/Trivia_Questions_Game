@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import getToken from '../tests/helpers/api';
 import logo from '../trivia.png';
@@ -43,7 +42,7 @@ class Login extends React.Component {
     const apiToken = await getToken();
     localStorage.setItem('token', apiToken);
     history.push('/game');
-   };
+  };
 
   // Requisito 3: criei a função toSettings para enviar o usuário para a página de configurações.
   toSettings = () => {
