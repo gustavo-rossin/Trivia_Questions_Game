@@ -1,7 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import getToken from '../tests/helpers/api';
 import logo from '../trivia.png';
-// import PropTypes from 'prop-types';
-// import { connect } from 'react-redux';
 
 class Login extends React.Component {
   constructor() {
@@ -36,6 +37,13 @@ class Login extends React.Component {
     }, this.validation);
   };
 
+  handleClick = async () => {
+    const { history } = this.props;
+    const apiToken = await getToken();
+    localStorage.setItem('token', apiToken);
+    history.push('/game');
+  };
+
   render() {
     const { name, email, isDisabled } = this.state;
 
@@ -68,7 +76,7 @@ class Login extends React.Component {
         <button
           type="button"
           data-testid="btn-play"
-          onClick={ () => {} }
+          onClick={ this.handleClick }
           disabled={ isDisabled }
         >
           Play
@@ -78,4 +86,10 @@ class Login extends React.Component {
   }
 }
 
-export default Login;
+Login.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
+};
+
+export default connect()(Login);
