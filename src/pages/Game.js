@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Header from '../components/Header';
 
 class Game extends React.Component {
   constructor() {
@@ -62,6 +63,7 @@ class Game extends React.Component {
 
     return (
       <div className="App-header">
+        <Header />
         <div className="question-container">
           {isLoading ? (<p>...Loading</p>)
             : (
