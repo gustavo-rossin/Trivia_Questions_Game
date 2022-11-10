@@ -1,8 +1,8 @@
 // ACTIONS TYPES
-export const ADD_EMAIL = 'ADD_EMAIL';
+export const ADD_USER = 'ADD_USER';
 
 // ACTIONS CREATORS
-export const addEmail = (email) => ({
-  type: ADD_EMAIL,
-  email,
+export const addUser = (data) => ({
+  type: ADD_USER,
+  data,
 });

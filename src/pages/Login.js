@@ -1,7 +1,9 @@
+import PropTypes from 'prop-types';
 import React from 'react';
+import { connect } from 'react-redux';
+import { addUser } from '../redux/actions';
+import getToken from '../tests/helpers/api';
 import logo from '../trivia.png';
-// import PropTypes from 'prop-types';
-// import { connect } from 'react-redux';
 
 class Login extends React.Component {
   constructor() {
@@ -36,6 +38,21 @@ class Login extends React.Component {
     }, this.validation);
   };
 
+  handleClick = async () => {
+    const { history, dispatch } = this.props;
+    const { name, email } = this.state;
+    const apiToken = await getToken();
+    localStorage.setItem('token', apiToken);
+    dispatch(addUser({ name, email }));
+    history.push('/game');
+  };
+
+  // Requisito 3: criei a função toSettings para enviar o usuário para a página de configurações.
+  toSettings = () => {
+    const { history: { push } } = this.props;
+    push('/settings');
+  };
+
   render() {
     const { name, email, isDisabled } = this.state;
 
@@ -68,14 +85,29 @@ class Login extends React.Component {
         <button
           type="button"
           data-testid="btn-play"
-          onClick={ () => {} }
+          onClick={ this.handleClick }
           disabled={ isDisabled }
         >
           Play
+        </button>
+
+        <button
+          type="button"
+          data-testid="btn-settings"
+          onClick={ this.toSettings }
+        >
+          Settings
         </button>
       </div>
     );
   }
 }
 
-export default Login;
+Login.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
+  dispatch: PropTypes.func.isRequired,
+};
+
+export default connect()(Login);

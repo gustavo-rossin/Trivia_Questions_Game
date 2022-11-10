@@ -1,3 +1,5 @@
+import { ADD_USER } from '../actions';
+
 const initialState = {
   name: '', // nome-da-pessoa
   assertions: 0, // número-de-acertos
@@ -7,9 +9,10 @@ const initialState = {
 
 const player = (state = initialState, action) => {
   switch (action.type) {
-  case 'LOGIN':
+  case ADD_USER:
     return {
       ...state,
+      ...action.data,
     };
   default:
     return state;
