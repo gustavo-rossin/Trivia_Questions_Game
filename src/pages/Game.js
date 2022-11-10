@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { addScore } from '../redux/actions';
 import Header from '../components/Header';
 import Alternatives from '../components/Alternatives';
 
@@ -55,7 +57,15 @@ class Game extends React.Component {
     this.setState({ alternatives });
   };
 
-  handleAnswer = () => {
+  handleAnswer = ({ target }) => {
+    const { results, questionIndex, timer } = this.state;
+    const { dispatch } = this.props;
+    const TEN = 10;
+    const difficulties = { hard: 3, medium: 2, easy: 1 };
+    if (results[questionIndex].correct_answer === target.value) {
+      const score = TEN + (timer * difficulties[results[questionIndex].difficulty]);
+      dispatch(addScore(score));
+    }
     this.setState({ showAnswer: true });
   };
 
@@ -121,6 +131,7 @@ class Game extends React.Component {
 
 Game.propTypes = {
   history: PropTypes.shape({ push: PropTypes.func }).isRequired,
+  dispatch: PropTypes.func.isRequired,
 };
 
-export default Game;
+export default connect()(Game);

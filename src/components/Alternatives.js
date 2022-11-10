@@ -10,6 +10,7 @@ class Alternatives extends React.Component {
         data-testid={ dataid }
         style={ { border: showAnswer && `3px solid ${color}` } }
         onClick={ handleAnswer }
+        value={ element }
         disabled={ timer < 1 }
       >
         {element}
