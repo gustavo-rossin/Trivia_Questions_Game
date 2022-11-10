@@ -124,6 +124,17 @@ class Game extends React.Component {
               </>
             )}
         </div>
+        {showAnswer && (
+          <button
+            type="button"
+            data-testid="btn-next"
+            onClick={ () => {
+              this.setState({ questionIndex: +1, showAnswer: false });
+            } }
+          >
+            Next
+          </button>
+        )}
       </div>
     );
   }
