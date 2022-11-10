@@ -5,6 +5,8 @@ import { addScore } from '../redux/actions';
 import Header from '../components/Header';
 import Alternatives from '../components/Alternatives';
 
+let timerInterval;
+
 class Game extends React.Component {
   constructor() {
     super();
@@ -37,6 +39,7 @@ class Game extends React.Component {
       }
       this.setState({ results: data.results, isLoading: false });
       this.shuffleQuestions(data.results);
+      this.countTimer();
     } catch (error) {
       localStorage.removeItem('token');
       return history.push('/');
@@ -66,23 +69,48 @@ class Game extends React.Component {
     this.setState({ showAnswer: true });
   };
 
+  countTimer = async () => {
+    const ONE_SECOND = 1000;
+    timerInterval = setInterval(() => {
+      this.setState((prev) => ({
+        timer: prev.timer - 1,
+        showAnswer: prev.timer === 1 ? true : prev.showAnswer,
+      }), () => {
+        const { timer, showAnswer } = this.state;
+        if (timer === 0 || showAnswer) {
+          clearInterval(timerInterval);
+        }
+      });
+    }, ONE_SECOND);
+  };
+
   handleNext = () => {
     const { history } = this.props;
     const { questionIndex } = this.state;
-    this.setState({ showAnswer: false });
-    const FIVE = 5;
-    if (questionIndex <= FIVE) {
-      this.setState({ questionIndex: questionIndex + 1 });
-    } else {
+    const FOUR = 4;
+    if (questionIndex === FOUR) {
       history.push('/feedback');
     }
+    this.setState(({
+      questionIndex: questionIndex + 1,
+      showAnswer: false }));
+    this.countTimer();
   };
 
   render() {
-    const { results, questionIndex, isLoading, alternatives, showAnswer } = this.state;
+    const { results, questionIndex, isLoading,
+      alternatives, showAnswer, timer } = this.state;
+
     return (
       <div className="App-header">
         <Header />
+        <div className="timer-container">
+          <span>
+            {timer}
+            {' '}
+            s
+          </span>
+        </div>
         <div className="question-container">
           {isLoading ? (<p>...Loading</p>)
             : (
@@ -104,8 +132,11 @@ class Game extends React.Component {
                         ? 'rgb(6, 240, 15)' : 'red' }
                       handleAnswer={ this.handleAnswer }
                       element={ element }
+                      timer={ timer }
                     />
                   ))}
+                </div>
+                <div>
                   { showAnswer && (
                     <button
                       type="button"
