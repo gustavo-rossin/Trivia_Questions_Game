@@ -66,6 +66,18 @@ class Game extends React.Component {
     this.setState({ showAnswer: true });
   };
 
+  handleNext = () => {
+    const { history } = this.props;
+    const { questionIndex } = this.state;
+    this.setState({ showAnswer: false });
+    const FIVE = 5;
+    if (questionIndex <= FIVE) {
+      this.setState({ questionIndex: questionIndex + 1 });
+    } else {
+      history.push('/feedback');
+    }
+  };
+
   render() {
     const { results, questionIndex, isLoading, alternatives, showAnswer } = this.state;
     return (
@@ -94,6 +106,15 @@ class Game extends React.Component {
                       element={ element }
                     />
                   ))}
+                  { showAnswer && (
+                    <button
+                      type="button"
+                      data-testid="btn-next"
+                      onClick={ this.handleNext }
+                    >
+                      Next
+                    </button>
+                  )}
                 </div>
               </>
             )}
