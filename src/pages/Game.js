@@ -56,7 +56,7 @@ class Game extends React.Component {
   };
 
   render() {
-    const { results, questionIndex, isLoading, alternatives, showAnswer } = this.state;
+    const { questionIndex, results, isLoading, alternatives, showAnswer } = this.state;
     return (
       <div className="App-header">
         <Header />
