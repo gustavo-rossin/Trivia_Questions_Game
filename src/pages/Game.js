@@ -5,6 +5,8 @@ import { addScore } from '../redux/actions';
 import Header from '../components/Header';
 import Alternatives from '../components/Alternatives';
 
+let timerInterval;
+
 class Game extends React.Component {
   constructor() {
     super();
@@ -37,6 +39,7 @@ class Game extends React.Component {
       }
       this.setState({ results: data.results, isLoading: false });
       this.shuffleQuestions(data.results);
+      this.countTimer();
     } catch (error) {
       localStorage.removeItem('token');
       return history.push('/');
@@ -66,11 +69,33 @@ class Game extends React.Component {
     this.setState({ showAnswer: true });
   };
 
+  countTimer = async () => {
+    const ONE_SECOND = 1000;
+    timerInterval = setInterval(() => {
+      this.setState((prev) => ({
+        timer: prev.timer - 1,
+        showAnswer: prev.timer === 1 ? true : prev.showAnswer,
+      }));
+    }, ONE_SECOND);
+  };
+
   render() {
-    const { results, questionIndex, isLoading, alternatives, showAnswer } = this.state;
+    const { results, questionIndex, isLoading,
+      alternatives, showAnswer, timer } = this.state;
+
+    if (timer === 0 || showAnswer) {
+      clearInterval(timerInterval);
+    }
     return (
       <div className="App-header">
         <Header />
+        <div className="timer-container">
+          <span>
+            {timer}
+            {' '}
+            s
+          </span>
+        </div>
         <div className="question-container">
           {isLoading ? (<p>...Loading</p>)
             : (
@@ -92,6 +117,7 @@ class Game extends React.Component {
                         ? 'rgb(6, 240, 15)' : 'red' }
                       handleAnswer={ this.handleAnswer }
                       element={ element }
+                      timer={ timer }
                     />
                   ))}
                 </div>
