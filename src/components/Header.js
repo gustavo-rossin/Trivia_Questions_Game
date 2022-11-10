@@ -6,14 +6,17 @@ import md5 from 'crypto-js/md5';
 class Header extends React.Component {
   render() {
     const { name, score, email } = this.props;
-    const hash = md5(email).toString();
 
     return (
       <div>
         <p data-testid="header-player-name">{ name }</p>
-        <p data-testid="header-score">{ score }</p>
+        <p data-testid="header-score">
+          Score:
+          {' '}
+          { score }
+        </p>
         <img
-          src={ `https://www.gravatar.com/avatar/${hash}` }
+          src={ `https://www.gravatar.com/avatar/${md5(email).toString()}` }
           alt={ name }
           data-testid="header-profile-picture"
         />
