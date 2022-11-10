@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
+import Alternatives from '../components/Alternatives';
 
 class Game extends React.Component {
   constructor() {
@@ -13,8 +14,10 @@ class Game extends React.Component {
         incorrect_answers: [''],
         correct_answer: '',
       }],
+      alternatives: [],
       questionIndex: 0,
       isLoading: true,
+      showAnswer: false,
     };
   }
 
@@ -30,37 +33,30 @@ class Game extends React.Component {
         return history.push('/');
       }
       this.setState({ results: data.results, isLoading: false });
+      this.shuffleQuestions(data.results);
     } catch (error) {
       localStorage.removeItem('token');
       return history.push('/');
     }
   }
 
+  shuffleQuestions = (results) => {
+    const alternatives = [];
+    results.forEach((element) => {
+      const sortConstant = 0.5;
+      const shuffledAlternatives = [...element.incorrect_answers, element.correct_answer]
+        .sort(() => Math.random() - sortConstant);
+      alternatives.push(shuffledAlternatives);
+    });
+    this.setState({ alternatives });
+  };
+
+  handleAnswer = () => {
+    this.setState({ showAnswer: true });
+  };
+
   render() {
-    const { results, questionIndex, isLoading } = this.state;
-    const sortConstant = 0.5;
-    const wrongAnswers = results[questionIndex].incorrect_answers.map((e, i) => (
-      <button
-        type="button"
-        data-testid={ `wrong-answer-${i}` }
-        key={ `wrong-answer-${i}-${questionIndex}` }
-      >
-        {e}
-      </button>
-    ));
-    const correctAnswer = (
-      <button
-        type="button"
-        data-testid="correct-answer"
-        key={ `correct-answer-${questionIndex}` }
-      >
-        {results[questionIndex].correct_answer}
-      </button>
-    );
-
-    const alternatives = [...wrongAnswers, correctAnswer]
-      .sort(() => Math.random() - sortConstant);
-
+    const { results, questionIndex, isLoading, alternatives, showAnswer } = this.state;
     return (
       <div className="App-header">
         <Header />
@@ -75,7 +71,18 @@ class Game extends React.Component {
                   {results[questionIndex].question}
                 </p>
                 <div data-testid="answer-options">
-                  {alternatives}
+                  {alternatives[questionIndex].map((element, index) => (
+                    <Alternatives
+                      key={ `awnser-${questionIndex}-${index}` }
+                      showAnswer={ showAnswer }
+                      dataid={ results[questionIndex].correct_answer === element
+                        ? 'correct-answer' : `wrong-answer-${index}` }
+                      color={ results[questionIndex].correct_answer === element
+                        ? 'rgb(6, 240, 15)' : 'red' }
+                      handleAnswer={ this.handleAnswer }
+                      element={ element }
+                    />
+                  ))}
                 </div>
               </>
             )}
