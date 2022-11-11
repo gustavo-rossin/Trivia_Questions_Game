@@ -10,15 +10,19 @@ class Header extends React.Component {
     return (
       <div>
         <p data-testid="header-player-name">{ name }</p>
-        <p data-testid="header-score">{ score }</p>
         <img
           src={ `https://www.gravatar.com/avatar/${md5(email).toString()}` }
           alt={ name }
           data-testid="header-profile-picture"
         />
+        <p>Seu score foi de:</p>
+        <h2 data-testid="header-score">{score}</h2>
+        <h2 data-testid="feedback-total-score">{score}</h2>
+        <p>O número de perguntas corretas foi de:</p>
+        <h4 data-testid="feedback-total-question">{assertions}</h4>
         {assertions >= minAssertions
-          ? <p>Well Done!</p>
-          : <p>Could be better...</p>}
+          ? <h3>Well Done!</h3>
+          : <h3>Could be better...</h3>}
       </div>
     );
   }
