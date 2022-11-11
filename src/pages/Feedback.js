@@ -10,11 +10,19 @@ class Feedback extends React.Component {
   };
 
   render() {
+    const { history } = this.props;
     const { score, assertions } = this.props;
     const minAssertions = 3;
     return (
-      <div data-testid="feedback-text">
+      <div data-testid="feedback-text" className="App-header">
         <Header />
+        <button
+          type="button"
+          data-testid="btn-ranking"
+          onClick={ () => history.push('/ranking') }
+        >
+          Ranking
+        </button>
         <div>
           <p>Seu score foi de:</p>
           <h2 data-testid="feedback-total-score">{score}</h2>
@@ -44,7 +52,7 @@ const mapStateToProps = (globalState) => ({
 Feedback.propTypes = {
   score: PropTypes.number.isRequired,
   assertions: PropTypes.number.isRequired,
-  history: PropTypes.shape().isRequired,
+  history: PropTypes.shape({ push: PropTypes.func }).isRequired,
 };
 
 export default connect(mapStateToProps)(Feedback);
