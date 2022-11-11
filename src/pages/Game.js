@@ -75,17 +75,32 @@ class Game extends React.Component {
       this.setState((prev) => ({
         timer: prev.timer - 1,
         showAnswer: prev.timer === 1 ? true : prev.showAnswer,
-      }));
+      }), () => {
+        const { timer, showAnswer } = this.state;
+        if (timer === 0 || showAnswer) {
+          clearInterval(timerInterval);
+        }
+      });
     }, ONE_SECOND);
+  };
+
+  handleNext = () => {
+    const { history } = this.props;
+    const { questionIndex } = this.state;
+    const FOUR = 4;
+    if (questionIndex === FOUR) {
+      history.push('/feedback');
+    }
+    this.setState(({
+      questionIndex: questionIndex + 1,
+      showAnswer: false }));
+    this.countTimer();
   };
 
   render() {
     const { results, questionIndex, isLoading,
       alternatives, showAnswer, timer } = this.state;
 
-    if (timer === 0 || showAnswer) {
-      clearInterval(timerInterval);
-    }
     return (
       <div className="App-header">
         <Header />
@@ -121,20 +136,20 @@ class Game extends React.Component {
                     />
                   ))}
                 </div>
+                <div>
+                  { showAnswer && (
+                    <button
+                      type="button"
+                      data-testid="btn-next"
+                      onClick={ this.handleNext }
+                    >
+                      Next
+                    </button>
+                  )}
+                </div>
               </>
             )}
         </div>
-        {showAnswer && (
-          <button
-            type="button"
-            data-testid="btn-next"
-            onClick={ () => {
-              this.setState({ questionIndex: +1, showAnswer: false });
-            } }
-          >
-            Next
-          </button>
-        )}
       </div>
     );
   }
