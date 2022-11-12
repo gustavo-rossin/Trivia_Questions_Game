@@ -4,15 +4,17 @@ const initialState = {
   name: '', // nome-da-pessoa
   assertions: 0, // número-de-acertos
   score: 0, // pontuação
-  gravatarEmail: '', // email-da-pessoa
+  email: '', // email-da-pessoa
 };
 
 const player = (state = initialState, action) => {
   switch (action.type) {
   case ADD_USER:
     return {
-      ...state,
-      ...action.data,
+      name: action.data.name,
+      assertions: 0,
+      score: 0,
+      email: action.data.email,
     };
   case ADD_SCORE:
     return {
