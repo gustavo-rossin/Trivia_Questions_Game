@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
+import md5 from 'crypto-js/md5';
 import Header from '../components/Header';
 
 class Feedback extends React.Component {
@@ -9,8 +10,20 @@ class Feedback extends React.Component {
     history.push('/');
   };
 
+  handleRanking = () => {
+    const { name, score, email, history } = this.props;
+    const picture = `https://www.gravatar.com/avatar/${md5(email).toString()}`;
+    const userData = { name, score, picture };
+    const ranking = JSON.parse(localStorage.getItem('ranking'));
+    if (!ranking) {
+      localStorage.setItem('ranking', JSON.stringify([userData]));
+    } else {
+      localStorage.setItem('ranking', JSON.stringify([...ranking, userData]));
+    }
+    history.push('/ranking');
+  };
+
   render() {
-    const { history } = this.props;
     const { score, assertions } = this.props;
     const minAssertions = 3;
     return (
@@ -19,7 +32,7 @@ class Feedback extends React.Component {
         <button
           type="button"
           data-testid="btn-ranking"
-          onClick={ () => history.push('/ranking') }
+          onClick={ this.handleRanking }
         >
           Ranking
         </button>
@@ -50,6 +63,8 @@ const mapStateToProps = (globalState) => ({
 });
 
 Feedback.propTypes = {
+  name: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
   score: PropTypes.number.isRequired,
   assertions: PropTypes.number.isRequired,
   history: PropTypes.shape({ push: PropTypes.func }).isRequired,
