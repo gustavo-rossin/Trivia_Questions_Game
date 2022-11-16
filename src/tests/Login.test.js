@@ -48,7 +48,7 @@ describe('Testa a página de Login', () => {
     const buttonPlay = screen.getByRole('button', { name: 'Play' });
     userEvent.click(buttonPlay);
 
-    await waitFor(() => expect(history.location.pathname).toBe('/game'));
+    await waitFor(() => expect(history.location.pathname).toBe('/game'), { timeout: 3000 });
   });
 
   it('Verifica se o Jogo Trivia encaminha o jogador para a página de Configurações.', () => {
