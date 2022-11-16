@@ -167,7 +167,18 @@ body {
 .question-container p {
   font-size: 20px;
   font-weight: 300;
-  margin: 15px 50px;
+  margin: 15px auto;
+}
+
+.question-container p:nth-child( 1 ) {
+  font-size: 16px;
+}
+
+.question-container p:nth-child( 2 ) {
+  font-family: monospace;
+  font-weight: 400;
+  margin-top: 15px;
+  max-width: 90%;
 }
 
 @keyframes grow {
@@ -202,7 +213,7 @@ body {
   box-sizing: border-box;
   color: white;
   cursor: pointer;
-  font-family: system-ui , -apple-system , Roboto , Ubuntu , Helvetica Neue , sans-serif;
+  font-family: monospace;
   margin: 10px;
   outline: none;
   padding: 15px;
