@@ -66,36 +66,31 @@ body {
 
 .play-btn {
   background: #2fc18c;
+  border: none;
   border-radius: 5px;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  color: rgb(34, 34, 34, 0.9);
+  cursor: pointer;
   font-family: monospace;
+  font-weight: 600;
   height: 45px;
-  left: 380px;
-  padding-top: 1em;
-  position: relative;
-  top: 596px;
+  margin: 20px 0;
+  padding: 1em;
   width: 519px;
 }
 
 .name-input {
   align-items: flex-start;
-
-  /* white */
   background: white;
-
-  /* gray 300 */
-  border: 1px solid #e1e5eb;
-  border-radius: 0;
+  border: none;
+  border-radius: 5px;
   display: flex;
   flex-direction: column;
   font-family: monospace;
   gap: 10px;
   height: 45px;
-
-  /* left: 380px; */
-
-  /* position: absolute; */
   margin-top: 30px;
+  padding: 0;
   text-align: center;
   width: 519px;
 }
@@ -107,14 +102,15 @@ body {
   background: white;
 
   /* gray 300 */
-  border: 1px solid #e1e5eb;
-  border-radius: 0;
+  border: none;
+  border-radius: 5px;
   display: flex;
   flex-direction: column;
   font-family: monospace;
   gap: 10px;
   height: 45px;
   margin-top: 20px;
+  padding: 0;
   text-align: center;
   width: 519px;
 }
@@ -125,12 +121,104 @@ body {
 }
 
 .settings-btn {
+  align-self: flex-end;
   background: #2fc18c;
+  border: none;
   border-radius: 5px;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-  color: rgba(0, 0, 0, 0.25);
+  color: rgba(34, 34, 34, 0.9);
+  cursor: pointer;
   font-family: monospace;
+  font-weight: 600;
+  height: 40px;
+  margin-right: 15px;
+  width: 100px;
+}
+
+.settings-btn:hover, .play-btn:hover {
+  filter: brightness(80%);
+}
+
+.player-name {
+  font-weight: 300;
+  margin: 15px 0;
+  text-transform: capitalize;
+}
+
+.profile-pic {
+  border-radius: 100%;
+  order: -1;
+  width: 100px;
+}
+
+.header {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+}
+
+.score {
+  font-size: 26px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.question-container p {
+  font-size: 20px;
+  font-weight: 300;
+  margin: 15px 50px;
+}
+
+@keyframes grow {
+
+  0% {
+    height: 0;
+  }
+
+  100% {
+    height: 40px;
+  }
+}
+
+.button-next {
+  animation: grow 0.3s;
+  background: #2fc18c;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  color: rgba(34, 34, 34, 0.9);
+  cursor: pointer;
+  font-family: monospace;
+  font-weight: 600;
   height: 40px;
   width: 100px;
 }
 
+.alternatives {
+  background-color: transparent;
+  border: 3px solid white;
+  border-radius: 25px;
+  box-sizing: border-box;
+  color: white;
+  cursor: pointer;
+  font-family: system-ui , -apple-system , Roboto , Ubuntu , Helvetica Neue , sans-serif;
+  margin: 10px;
+  outline: none;
+  padding: 15px;
+  transition: 0.2s;
+}
+
+.alternatives:disabled {
+  cursor: default;
+}
+
+.next-container {
+  height: 42px;
+  margin-top: 15px;
+}
+
+.timer-container {
+  font-style: italic;
+  font-weight: 600;
+}

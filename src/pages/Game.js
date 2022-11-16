@@ -136,11 +136,12 @@ class Game extends React.Component {
                     />
                   ))}
                 </div>
-                <div>
+                <div className="next-container">
                   { showAnswer && (
                     <button
                       type="button"
                       data-testid="btn-next"
+                      className="button-next"
                       onClick={ this.handleNext }
                     >
                       Next
