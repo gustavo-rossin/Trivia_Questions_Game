@@ -47,7 +47,7 @@ class Login extends React.Component {
     history.push('/game');
   };
 
-  // Requisito 3: criei a função toSettings para enviar o usuário para a página de configurações.
+  // Requisito 3: criei a função toSettings para enviar o usuário para a página de configurações
   toSettings = () => {
     const { history: { push } } = this.props;
     push('/settings');
@@ -61,8 +61,9 @@ class Login extends React.Component {
         <h2>Login</h2>
         <img src={ logo } className="App-logo" alt="logo" />
         <label htmlFor="name">
-          Nome
           <input
+            placeholder="Nome de usuário"
+            className="name-input"
             type="text"
             name="name"
             data-testid="input-player-name"
@@ -72,8 +73,9 @@ class Login extends React.Component {
         </label>
 
         <label htmlFor="email">
-          E-mail
           <input
+            placeholder="E-mail"
+            className="email-input"
             type="email"
             name="email"
             data-testid="input-gravatar-email"
@@ -83,6 +85,7 @@ class Login extends React.Component {
         </label>
 
         <button
+          className="play-btn"
           type="button"
           data-testid="btn-play"
           onClick={ this.handleClick }
@@ -92,6 +95,7 @@ class Login extends React.Component {
         </button>
 
         <button
+          className="settings-btn"
           type="button"
           data-testid="btn-settings"
           onClick={ this.toSettings }
