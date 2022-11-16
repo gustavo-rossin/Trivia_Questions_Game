@@ -96,9 +96,9 @@ class Game extends React.Component {
   render() {
     const { results, questionIndex, isLoading,
       alternatives, showAnswer, timer } = this.state;
-    
+
     if (timer === 0 || showAnswer) {
-          clearInterval(timerInterval);
+      clearInterval(timerInterval);
     }
 
     return (
