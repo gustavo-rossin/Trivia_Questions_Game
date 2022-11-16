@@ -75,12 +75,7 @@ class Game extends React.Component {
       this.setState((prev) => ({
         timer: prev.timer - 1,
         showAnswer: prev.timer === 1 ? true : prev.showAnswer,
-      }), () => {
-        const { timer, showAnswer } = this.state;
-        if (timer === 0 || showAnswer) {
-          clearInterval(timerInterval);
-        }
-      });
+      }));
     }, ONE_SECOND);
   };
 
@@ -93,13 +88,18 @@ class Game extends React.Component {
     }
     this.setState(({
       questionIndex: questionIndex + 1,
-      showAnswer: false }));
+      showAnswer: false,
+      timer: 30 }));
     this.countTimer();
   };
 
   render() {
     const { results, questionIndex, isLoading,
       alternatives, showAnswer, timer } = this.state;
+
+    if (timer === 0 || showAnswer) {
+      clearInterval(timerInterval);
+    }
 
     return (
       <div className="App-header">
