@@ -93,7 +93,8 @@ class Game extends React.Component {
     }
     this.setState(({
       questionIndex: questionIndex + 1,
-      showAnswer: false }));
+      showAnswer: false,
+      timer: 30 }));
     this.countTimer();
   };
 
