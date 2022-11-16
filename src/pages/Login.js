@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { addUser } from '../redux/actions';
 import getToken from '../tests/helpers/api';
 import logo from '../trivia.png';
+import icone_trybe '../icone_trybe';
 
 class Login extends React.Component {
   constructor() {
@@ -60,9 +61,11 @@ class Login extends React.Component {
       <div className="App-header">
         <h2>Login</h2>
         <img src={ logo } className="App-logo" alt="logo" />
+        {/* <img src={ icone_trybe } className="icone-trybe" alt="icone-trybe" /> */}
         <label htmlFor="name">
-          Nome
           <input
+            placeholder="Nome de usuário"
+            className="name-input"
             type="text"
             name="name"
             data-testid="input-player-name"
@@ -72,8 +75,9 @@ class Login extends React.Component {
         </label>
 
         <label htmlFor="email">
-          E-mail
           <input
+            placeholder="E-mail"
+            className="email-input"
             type="email"
             name="email"
             data-testid="input-gravatar-email"
@@ -83,6 +87,7 @@ class Login extends React.Component {
         </label>
 
         <button
+          className="play-btn"
           type="button"
           data-testid="btn-play"
           onClick={ this.handleClick }
@@ -92,6 +97,7 @@ class Login extends React.Component {
         </button>
 
         <button
+          className="settings-btn"
           type="button"
           data-testid="btn-settings"
           onClick={ this.toSettings }

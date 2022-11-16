@@ -34,9 +34,11 @@ body {
   color: white;
   display: flex;
   flex-direction: column;
+  font-family: system-ui , -apple-system , Roboto , Ubuntu , Helvetica Neue , sans-serif;
   font-size: calc(10px + 2vmin);
   justify-content: center;
   min-height: 100vh;
+  padding: 0%;
 }
 
 .App-link {
@@ -61,3 +63,74 @@ body {
     transform: translate3d(4px, 0, 0);
   }
 }
+
+.play-btn {
+  background: #2fc18c;
+  border-radius: 5px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  font-family: monospace;
+  height: 45px;
+  left: 380px;
+  padding-top: 1em;
+  position: relative;
+  top: 596px;
+  width: 519px;
+}
+
+.name-input {
+  align-items: flex-start;
+
+  /* white */
+  background: white;
+
+  /* gray 300 */
+  border: 1px solid #e1e5eb;
+  border-radius: 0;
+  display: flex;
+  flex-direction: column;
+  font-family: monospace;
+  gap: 10px;
+  height: 45px;
+
+  /* left: 380px; */
+
+  /* position: absolute; */
+  margin-top: 30px;
+  text-align: center;
+  width: 519px;
+}
+
+.email-input {
+  align-items: flex-start;
+
+  /* white */
+  background: white;
+
+  /* gray 300 */
+  border: 1px solid #e1e5eb;
+  border-radius: 0;
+  display: flex;
+  flex-direction: column;
+  font-family: monospace;
+  gap: 10px;
+  height: 45px;
+  margin-top: 20px;
+  text-align: center;
+  width: 519px;
+}
+
+.name-input:focus, .email-input:focus {
+  outline: 1px solid #2fc18c;
+  outline-offset: 2px;
+}
+
+.settings-btn {
+  background: #2fc18c;
+  border-radius: 5px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  color: rgba(0, 0, 0, 0.25);
+  font-family: monospace;
+  height: 40px;
+  width: 100px;
+}
+
