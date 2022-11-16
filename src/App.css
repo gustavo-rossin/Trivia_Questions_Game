@@ -135,10 +135,6 @@ body {
   width: 100px;
 }
 
-.settings-btn:hover, .play-btn:hover {
-  filter: brightness(80%);
-}
-
 .player-name {
   font-weight: 300;
   margin: 15px 0;
@@ -232,4 +228,8 @@ body {
 .timer-container {
   font-style: italic;
   font-weight: 600;
+}
+
+.settings-btn:hover, .play-btn:hover, .button-next:hover {
+  filter: brightness(80%);
 }
