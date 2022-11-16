@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { addUser } from '../redux/actions';
 import getToken from '../tests/helpers/api';
 import logo from '../trivia.png';
-import icone_trybe '../icone_trybe';
 
 class Login extends React.Component {
   constructor() {
@@ -48,7 +47,7 @@ class Login extends React.Component {
     history.push('/game');
   };
 
-  // Requisito 3: criei a função toSettings para enviar o usuário para a página de configurações.
+  // Requisito 3: criei a função toSettings para enviar o usuário para a página de configurações
   toSettings = () => {
     const { history: { push } } = this.props;
     push('/settings');
@@ -61,7 +60,6 @@ class Login extends React.Component {
       <div className="App-header">
         <h2>Login</h2>
         <img src={ logo } className="App-logo" alt="logo" />
-        {/* <img src={ icone_trybe } className="icone-trybe" alt="icone-trybe" /> */}
         <label htmlFor="name">
           <input
             placeholder="Nome de usuário"
