@@ -7,11 +7,12 @@ class Alternatives extends React.Component {
     return (
       <button
         type="button"
+        className="alternatives"
         data-testid={ dataid }
         style={ { border: showAnswer && `3px solid ${color}` } }
         onClick={ handleAnswer }
         value={ element }
-        disabled={ timer < 1 }
+        disabled={ timer < 1 || showAnswer }
       >
         {element}
       </button>

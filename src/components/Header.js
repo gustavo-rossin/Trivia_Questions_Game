@@ -8,14 +8,15 @@ class Header extends React.Component {
     const { name, score, email } = this.props;
 
     return (
-      <div>
-        <p data-testid="header-player-name">{ name }</p>
+      <div className="header">
+        <p data-testid="header-player-name" className="player-name">{ name }</p>
         <img
           src={ `https://www.gravatar.com/avatar/${md5(email).toString()}` }
           alt={ name }
           data-testid="header-profile-picture"
+          className="profile-pic"
         />
-        <h2 data-testid="header-score">{score}</h2>
+        <h2 data-testid="header-score" className="score">{score}</h2>
       </div>
     );
   }

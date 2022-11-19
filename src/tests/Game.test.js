@@ -6,7 +6,7 @@ import { act } from 'react-dom/test-utils';
 import data from './helpers/data';
 
 describe('testa página Game', () => {
-  jest.setTimeout(31000);
+  jest.setTimeout(60000);
   beforeEach(() => {
     jest.spyOn(global, 'fetch').mockResolvedValue({json: jest.fn().mockResolvedValue(data)});
   });
